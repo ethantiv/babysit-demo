@@ -42,7 +42,7 @@ class RoomScheduler:
         merged: list[list[datetime]] = []
         for booking in bookings:
             if merged and booking.start <= merged[-1][1]:
-                merged[-1][1] = booking.end
+                merged[-1][1] = max(merged[-1][1], booking.end)
             else:
                 merged.append([booking.start, booking.end])
         return [(start, end) for start, end in merged]
